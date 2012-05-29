@@ -41,17 +41,12 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = theme('item_list',$terms);
       }      
       elseif ($delta == 1) {
-        $form = drupal_get_form('views-exposed-form-People-page-1');
-        //$form['appt']['#options']['All'] = t('All');
-        dsm($form);
+        $block['content'] = drupal_get_form('views-exposed-form-People-page-1');
         $block['subject'] = "";
-        $block['content'] = $form;
       }
       elseif ($delta == 2) {
-        //$form = drupal_get_form('views-exposed-form-People-page-2');
-        //$form['area']['#options']['All'] = t('All');
+        $block['content'] = drupal_get_form('views-exposed-form-People-page-2');
         $block['subject'] = "";
-        //$block['content'] = $form;
       }
       return $block;
   }  
