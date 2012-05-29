@@ -42,6 +42,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $list = array();
         $terms = taxonomy_get_tree(2);
         $_GET['area'] ? $area = "&area=" . $_GET['area'] : "" ;
+        $list[] = '<a href="/directory?'. $area . '">All</a>';
         foreach ($terms as &$term) {
           $list[] = '<a href="/directory?appt=' . $term->tid . $area . '">' . $term->name . '</a>';
         }
@@ -52,6 +53,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $list = array();
         $terms = taxonomy_get_tree(1);
         $_GET['appt'] ? $appt = "&appt=" . $_GET['appt'] : "" ;
+        $list[] = '<a href="/directory?'. $appt . '">All</a>';
         foreach ($terms as &$term) {
           $list[] = '<a href="/directory?area=' . $term->tid . $appt . '">' . $term->name . '</a>';
         }
