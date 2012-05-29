@@ -40,9 +40,10 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       }      
       elseif ($delta == 1) {
         $list = array();
-        $terms = taxonomy_get_tree(1);
+        $terms = taxonomy_get_tree(2);
+        $_GET['area'] ? $area = "&" . $_GET['area'] : "" ;
         foreach ($terms as &$term) {
-          $list[] = '<a href="' . $term->tid . '">' . $term->name . '</a>';
+          $list[] = '<a href="/directory?appt=' . $term->tid . $area . '">' . $term->name . '</a>';
         }
         $block['content'] = theme('item_list',$list);
         $block['subject'] = "";
