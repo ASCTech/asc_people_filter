@@ -54,7 +54,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       }
       return $block;
 
-
+  }  
   
 }
 
