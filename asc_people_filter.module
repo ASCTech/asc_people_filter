@@ -17,7 +17,6 @@ function _people_form_build() {
   $display_id = 'page_1';
   $view->set_display($display_id);
   $view->init_handlers(); //initialize display handlers
-  var_dump($view);
   $form_state = array(
     'view' => $view,
     'display' => $view->display_handler->display,
@@ -26,7 +25,7 @@ function _people_form_build() {
     'rerender' => TRUE,
     'no_redirect' => TRUE,
   );
-  $form = drupal_build_form('views_exposed_form', $form_state); //create the filter form
+  $form = drupal_build_form('views-exposed-form-People-page-1', $form_state); //create the filter form
 
   dsm($form);
   $he = drupal_render($form);
