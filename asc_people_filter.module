@@ -42,7 +42,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $list = array();
         $terms = taxonomy_get_tree(1);
         foreach ($terms as &$term) {
-          $list[] = $term->name;
+          $list[] = '<a href="' . $term->tid . '">' . $term->name '</a>';
         }
         $block['content'] = theme('item_list',$list);
         $block['subject'] = "";
