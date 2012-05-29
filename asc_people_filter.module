@@ -25,12 +25,12 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       $terms = array();
 
       if (isset($_GET['area'])) {
-        $term = taxonomy_get_term($_GET['area']));
+        $term = taxonomy_get_term($_GET['area']);
         $terms[] = $term['name'];
       }
 
       if (isset($_GET['appt'])) {
-        $term = taxonomy_get_term($_GET['appt']));
+        $term = taxonomy_get_term($_GET['appt']);
         $terms[] = $term['name'];
       }
 
