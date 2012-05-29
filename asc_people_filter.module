@@ -13,8 +13,8 @@ function asc_people_filter_form_alter(&$form, $form_state, $form_id) {
 
 
 function _people_form_build() {
-  $view = views_get_view('jewelry');
-  $display_id = 'page';
+  $view = views_get_view('People');
+  $display_id = 'page_1';
   $view->set_display($display_id);
   $view->init_handlers(); //initialize display handlers
   $form_state = array(
