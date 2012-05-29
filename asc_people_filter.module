@@ -42,7 +42,8 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       }      
       elseif ($delta == 1) {
         $form = drupal_get_form('views-exposed-form-People-page-1');
-        $form['appt']['#options']['All'] = t('All');
+        //$form['appt']['#options']['All'] = t('All');
+        dsm($form);
         $block['subject'] = "";
         $block['content'] = $form;
       }
