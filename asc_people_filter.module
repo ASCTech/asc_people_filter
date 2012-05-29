@@ -30,7 +30,6 @@ function _people_form_build() {
   dsm($form);
   $he = drupal_render($form);
   return $he;
-  )
 }
 
 
