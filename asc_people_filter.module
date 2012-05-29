@@ -24,12 +24,12 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
     case 'view':
       $terms = array();
 
-      if (isset($_GET['area'])) {
+      if (isset($_GET['area']) && $_GET['area'] != "All") {
         $term = taxonomy_get_term($_GET['area']);
         $terms[] = $term->name;
       }
 
-      if (isset($_GET['appt'])) {
+      if (isset($_GET['appt']) && $_GET['appt'] != "All") {
         $term = taxonomy_get_term($_GET['appt']);
         $terms[] = $term->name;
       }
