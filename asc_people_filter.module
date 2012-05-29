@@ -41,7 +41,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = theme('item_list',$terms);
       }      
       elseif ($delta == 1) {
-        $block['content'] = drupal_get_form('views-exposed-form-People-page-1');
+        $block['content'] = drupal_build_form('views-exposed-form-People-page-1');
         $block['subject'] = "";
       }
       elseif ($delta == 2) {
