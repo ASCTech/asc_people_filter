@@ -19,25 +19,41 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
     case 'list':
       $blocks[0]['info'] = t('Active Filters');
       $blocks[0]['cache'] = BLOCK_NO_CACHE;
+      $blocks[1]['info'] = t('Appointments');
+      $blocks[2]['info'] = t('Research Interests');
       return $blocks;
 
     case 'view':
-      $terms = array();
+      if ($delta == 0) {
+        $terms = array();
 
-      if (isset($_GET['area']) && $_GET['area'] != "All") {
-        $term = taxonomy_get_term($_GET['area']);
-        $terms[] = $term->name;
+        if (isset($_GET['area']) && $_GET['area'] != "All") {
+          $term = taxonomy_get_term($_GET['area']);
+          $terms[] = $term->name;
+        }
+
+        if (isset($_GET['appt']) && $_GET['appt'] != "All") {
+          $term = taxonomy_get_term($_GET['appt']);
+          $terms[] = $term->name;
+        }
+
+        $block['subject'] = t('Active Filters');
+        $block['content'] = theme('item_list',$terms);
+      }      
+      elseif ($delta == 1) {
+        $form = drupal_get_form('views-exposed-form-People-page-1');
+        $form['appt']['#options']['All'] = t('All');
+        $block['subject'] = "";
+        $block['content'] = $form;
       }
-
-      if (isset($_GET['appt']) && $_GET['appt'] != "All") {
-        $term = taxonomy_get_term($_GET['appt']);
-        $terms[] = $term->name;
+      elseif ($delta == 2) {
+        $form = drupal_get_form('views-exposed-form-People-page-2');
+        $form['area']['#options']['All'] = t('All');
+        $block['subject'] = "";
+        $block['content'] = $form;
       }
-
-      $block['subject'] = t('Active Filters');
-      $block['content'] = theme('item_list',$terms);
       return $block;
-  }
+
 
   
 }
