@@ -16,6 +16,7 @@ function _people_form_build() {
   $view = views_get_view('People');
   $display_id = 'page_1';
   $view->set_display($display_id);
+  dsm($view);
   $view->init_handlers(); //initialize display handlers
   $form_state = array(
     'view' => $view,
