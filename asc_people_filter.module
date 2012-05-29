@@ -19,6 +19,7 @@ function _people_get_exposed_filter_form(){
   $view->set_display('page');
   $view->init_handlers();
   $exposed_form = $view->display_handler->get_plugin('exposed_form');
+  dsm($exposed_form);
   return $exposed_form->render_exposed_form();
 }
 
