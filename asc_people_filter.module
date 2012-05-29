@@ -27,8 +27,8 @@ function _people_form_build() {
   );
   $form = drupal_build_form('views-exposed-form-People-page-1', $form_state); //create the filter form
 
-  $he = drupal_render($form);
-  return $he;
+  //$he = drupal_render($form);
+  //return $he;
 }
 
 
