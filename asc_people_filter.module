@@ -47,10 +47,10 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = $form;
       }
       elseif ($delta == 2) {
-        $form = drupal_get_form('views-exposed-form-People-page-2');
-        $form['area']['#options']['All'] = t('All');
+        //$form = drupal_get_form('views-exposed-form-People-page-2');
+        //$form['area']['#options']['All'] = t('All');
         $block['subject'] = "";
-        $block['content'] = $form;
+        //$block['content'] = $form;
       }
       return $block;
   }  
