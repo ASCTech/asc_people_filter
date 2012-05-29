@@ -25,11 +25,7 @@ function asc_people_filter_block($op = 'list, $delta = 0, $edit = array()') {
       $terms = array();
 
       if (isset($_GET['area'])) {
-        $terms[] = taxonomy_get_term($_GET['area']);
-      }
-
-      if (isset($_GET['appt'])) {
-        $terms[] = taxonomy_get_term($_GET['appt']);
+        dsm(taxonomy_get_term($_GET['area']));
       }
 
       $block['subject'] = t('Active Filters');
