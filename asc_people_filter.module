@@ -17,8 +17,8 @@ function asc_people_filter_form_alter(&$form, $form_state, $form_id) {
 function asc_people_filter_block($op = 'list, $delta = 0, $edit = array()') {
   switch ($op) {
     case 'list':
-      blocks[0]['info'] = t('Active Filters');
-      blocks[0]['cache'] = BLOCK_NO_CACHE;
+      $blocks[0]['info'] = t('Active Filters');
+      $blocks[0]['cache'] = BLOCK_NO_CACHE;
       return $blocks;
 
     case 'view':
