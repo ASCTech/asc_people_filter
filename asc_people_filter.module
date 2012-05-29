@@ -39,9 +39,12 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = theme('item_list',$terms);
       }      
       elseif ($delta == 1) {
+        $list = array();
         $terms = taxonomy_get_tree(1);
-        dsm($terms);
-        $block['content'] = "";
+        foreach ($terms as &$term) {
+          $list[] = $term['name'];
+        }
+        $block['content'] = theme('item_list',$list);
         $block['subject'] = "";
       }
       elseif ($delta == 2) {
