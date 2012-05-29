@@ -6,6 +6,7 @@ function asc_people_filter_form_alter(&$form, $form_state, $form_id) {
     
     if ($form['#id'] == 'views-exposed-form-People-page-1') {
       $form['appt']['#options']['All'] = t('All');
+      dsm($form);
     }
 
     if ($form['#id'] == 'views-exposed-form-People-page-2') {
