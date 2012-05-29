@@ -32,8 +32,9 @@ function asc_people_filter_block($op = 'list, $delta = 0, $edit = array()') {
         $terms[] = $_GET['appt'];
       }
 
-      block['subject'] = t('Active Filters');
-      block['content'] = theme('item_list',$terms);
+      $block['subject'] = t('Active Filters');
+      $block['content'] = theme('item_list',$terms);
+      return $block;
   }
 
   
