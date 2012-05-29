@@ -14,6 +14,14 @@ function asc_people_filter_form_alter(&$form, $form_state, $form_id) {
 
 }
 
+function _people_get_exposed_filter_form(){
+  $view = views_get_view('People');
+  $view->set_display('page');
+  $view->init_handlers();
+  $exposed_form = $view->display_handler->get_plugin('exposed_form');
+  return $exposed_form->render_exposed_form();
+}
+
 function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
@@ -41,7 +49,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = theme('item_list',$terms);
       }      
       elseif ($delta == 1) {
-        $block['content'] = drupal_build_form('views-exposed-form-People-page-1');
+        $block['content'] = _people_get_exposed_filter_form();
         $block['subject'] = "";
       }
       elseif ($delta == 2) {
