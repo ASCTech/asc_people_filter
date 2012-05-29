@@ -47,7 +47,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
           $list[] = '<a href="/directory?appt=' . $term->tid . $area . '">' . $term->name . '</a>';
         }
         $block['content'] = theme('item_list',$list);
-        $block['subject'] = "";
+        $block['subject'] = "Filter By:";
       }
       elseif ($delta == 2) {
         $list = array();
@@ -58,7 +58,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
           $list[] = '<a href="/directory?area=' . $term->tid . $appt . '">' . $term->name . '</a>';
         }
         $block['content'] = theme('item_list',$list);
-        $block['subject'] = "";
+        $block['subject'] = "Filter by Interest";
       }
       return $block;
   }  
