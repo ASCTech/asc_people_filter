@@ -53,9 +53,6 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = $form;
       }
       return $block;
-
-
-    }
   }  
 }
 
