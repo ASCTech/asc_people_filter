@@ -6,11 +6,8 @@ function asc_people_filter_form_alter(&$form, $form_state, $form_id) {
     
     if ($form['#id'] == 'views-exposed-form-People-page-1') {
       $form['appt']['#options']['All'] = t('All');
-      dsm($form);
-    }
-
-    if ($form['#id'] == 'views-exposed-form-People-page-2') {
       $form['area']['#options']['All'] = t('All');
+      dsm($form);
     }
 
 }
@@ -51,11 +48,11 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = theme('item_list',$terms);
       }      
       elseif ($delta == 1) {
-        $block['content'] = _people_get_exposed_filter_form();
+        $block['content'] = drupal_get_form('views-exposed-form-People-page-1');
         $block['subject'] = "";
       }
       elseif ($delta == 2) {
-        $block['content'] = drupal_get_form('views-exposed-form-People-page-2');
+        $block['content'] = drupal_get_form('views-exposed-form-People-page-1');
         $block['subject'] = "";
       }
       return $block;
