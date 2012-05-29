@@ -12,29 +12,6 @@ function asc_people_filter_form_alter(&$form, $form_state, $form_id) {
 }
 
 
-function _people_form_build() {
-  $view = views_get_view('People');
-  $display_id = 'page_1';
-  $view->set_display($display_id);
-  dsm($view);
-  $view->init_handlers(); //initialize display handlers
-  $form_state = array(
-    'view' => $view,
-    'display' => $view->display_handler->display,
-    'exposed_form_plugin' => $view->display_handler->get_plugin('exposed_form'), //exposed form plugins are used in Views 3
-    'method' => 'get',
-    'rerender' => TRUE,
-    'no_redirect' => TRUE,
-  );
-  $form = drupal_build_form('views-exposed-form-People-page-1', $form_state); //create the filter form
-
-  dsm($form);
-
-  //$he = drupal_render($form);
-  //return $he;
-}
-
-
 function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
@@ -62,11 +39,13 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $block['content'] = theme('item_list',$terms);
       }      
       elseif ($delta == 1) {
-        $block['content'] = _people_form_build();
+        $terms = taxonomy_get_tree(1);
+        dsm($terms);
+        $block['content'] = "";
         $block['subject'] = "";
       }
       elseif ($delta == 2) {
-        $block['content'] = drupal_get_form('views-exposed-form-People-page-1');
+        $block['content'] = "";
         $block['subject'] = "";
       }
       return $block;
