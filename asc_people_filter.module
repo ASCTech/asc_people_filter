@@ -44,7 +44,8 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $_GET['area'] ? $area = "&area=" . $_GET['area'] : "" ;
         $list[] = '<a href="/directory?'. $area . '">All</a>';
         foreach ($terms as &$term) {
-          $list[] = '<a href="/directory?appt=' . $term->tid . $area . '">' . $term->name . '</a>';
+          ($_GET['appt'] == $term->tid) ? $classes = "active" : $classes = "";
+          $list[] = '<a class=' . $classes .' href="/directory?appt=' . $term->tid . $area . '">' . $term->name . '</a>';
         }
         $block['content'] = theme('item_list',$list);
         $block['subject'] = "Filter By:";
@@ -55,7 +56,8 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $_GET['appt'] ? $appt = "&appt=" . $_GET['appt'] : "" ;
         $list[] = '<a href="/directory?'. $appt . '">All</a>';
         foreach ($terms as &$term) {
-          $list[] = '<a href="/directory?area=' . $term->tid . $appt . '">' . $term->name . '</a>';
+          ($_GET['area'] == $term->tid) ? $classes = "active" : $classes = "";
+          $list[] = '<a class=' . $classes . 'href="/directory?area=' . $term->tid . $appt . '">' . $term->name . '</a>';
         }
         $block['content'] = theme('item_list',$list);
         $block['subject'] = "Filter by Interest";
