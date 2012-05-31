@@ -40,7 +40,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       }      
       elseif ($delta == 1) {
         $list = array();
-        $vocabulary = "appointments"
+        $vocabulary = "appointments";
         $list = build_filter_list($vocabulary);
         
         $block['content'] = theme('item_list',$list);
@@ -48,7 +48,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       }
       elseif ($delta == 2) {
         $list = array();
-        $vocabulary = "interests"
+        $vocabulary = "interests";
         $list = build_filter_list($vocabulary);
         
         $block['content'] = theme('item_list',$list);
