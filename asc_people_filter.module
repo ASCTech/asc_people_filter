@@ -78,7 +78,7 @@ function constuct_querystring($vocabulary) {
   $string = "?";
   foreach ($_GET as $get => $value) {
     if ($get != 'q' && $get != $vocabulary) {
-      $string .= $get . "=" $value "&";
+      $string .= $get . "=" . $value . "&";
     }
   }
   return $string;
