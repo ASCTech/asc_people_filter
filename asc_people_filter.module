@@ -58,7 +58,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
   }  
 }
 
-function constuct_querystring($vocabulary) {
+function construct_querystring($vocabulary) {
   $string = "?";
   foreach ($_GET as $get => $value) {
     if ($get != 'q' && $get != $vocabulary) {
