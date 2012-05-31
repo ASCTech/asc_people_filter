@@ -58,6 +58,16 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
   }  
 }
 
+function constuct_querystring($vocabulary) {
+  $string = "?";
+  foreach ($_GET as $get => $value) {
+    if ($get != 'q' && $get != $vocabulary) {
+      $string .= $get . "=" . $value . "&";
+    }
+  }
+  return $string;
+}
+
 function build_filter_list($vocabulary) {
   $qs = construct_querystring($vocabulary);
 
@@ -74,14 +84,5 @@ function build_filter_list($vocabulary) {
   return($list);
 }
 
-function constuct_querystring($vocabulary) {
-  $string = "?";
-  foreach ($_GET as $get => $value) {
-    if ($get != 'q' && $get != $vocabulary) {
-      $string .= $get . "=" . $value . "&";
-    }
-  }
-  return $string;
-}
 
 ?>
