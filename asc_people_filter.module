@@ -45,7 +45,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         $qs = _construct_querystring($vocabulary);
         
         $block['content'] = theme('item_list',$list);
-        $block['subject'] = "Filter by Interest";
+        $block['subject'] = "Filter by:";
       }
       elseif ($delta == 2) {
         $list = array();
