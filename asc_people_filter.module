@@ -41,8 +41,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       elseif ($delta == 1) {
         $list = array();
         $vocabulary = "appointments"
-        $list = _build_filter_list($vocabulary);
-        $qs = _construct_querystring($vocabulary);
+        $list = build_filter_list($vocabulary);
         
         $block['content'] = theme('item_list',$list);
         $block['subject'] = "Filter by:";
@@ -50,8 +49,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       elseif ($delta == 2) {
         $list = array();
         $vocabulary = "interests"
-        $list = _build_filter_list($vocabulary);
-        $qs = _construct_querystring($vocabulary);
+        $list = build_filter_list($vocabulary);
         
         $block['content'] = theme('item_list',$list);
         $block['subject'] = "Filter by Interest";
@@ -60,8 +58,8 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
   }  
 }
 
-function _build_filter_list($vocabulary) {
-  $qs = _construct_querystring($vocabulary);
+function build_filter_list($vocabulary) {
+  $qs = construct_querystring($vocabulary);
 
   $result = db_query("SELECT vid FROM {vocabulary} WHERE name = '%s'", $vocabulary);
   $vid = db_fetch_object($result)->vid;
@@ -73,9 +71,10 @@ function _build_filter_list($vocabulary) {
     ($_GET[$vocabulary] == $term->tid) ? $classes = "active" : $classes = "";
       $list[] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
   }
+  return($list);
 }
 
-function _constuct_querystring($vocabulary) {
+function constuct_querystring($vocabulary) {
   $string = "?";
   foreach ($_GET as $get => $value) {
     if ($get != 'q' && $get != $vocabulary) {
