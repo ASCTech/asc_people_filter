@@ -84,7 +84,7 @@ function build_filter_list($vocabulary) {
       $list[$term->parents[0]]["children"][] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
     }    
     elseif ($term->parents[0] == 0) {
-      $list[$tid] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
+      $list[$term->tid] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
     }  
   }
   return($list);
