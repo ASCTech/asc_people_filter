@@ -79,7 +79,15 @@ function build_filter_list($vocabulary) {
   $list[] = '<a href="/directory'. $qs . '">All</a>';
   foreach ($terms as &$term) {
     ($_GET[$vocabulary] == $term->tid) ? $classes = "active" : $classes = "";
-      $list[] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
+
+    if ($term->parents[0] != 0) {
+      if (!isset($list[$term->parents[0]]) {
+        $list[$term->parents[0]] = array();
+      }
+      $list[$term->parents[0]] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
+    }    
+
+    $list[] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
   }
   return($list);
 }
