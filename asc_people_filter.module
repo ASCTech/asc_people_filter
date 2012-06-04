@@ -77,10 +77,11 @@ function build_filter_list($vocabulary) {
   $terms = taxonomy_get_tree($vid);
   unset($get[$vocabulary]);
   $list[] = '<a href="/directory'. $qs . '">All</a>';
+  $active_term = taxonomy_get_term($_GET[$vocabulary]);
   foreach ($terms as &$term) {
-    ($_GET[$vocabulary] == $term->tid) ? $classes = "active" : $classes = "";
+    ($active_term->tid == $term->tid) ? $classes = "active" : $classes = "";
 
-    if ($term->parents[0] != 0 && ($classes == "active" || $term->parents[0] == $_GET[$vocabulary])) {
+    if ($term->parents[0] != 0 && ($classes == "active" || $term->parents[0] == $_GET[$vocabulary]) || $active_term->parents[0] == $term->parents[0]) {
       $list[$term->parents[0]]["children"][] = '<a class="' . $classes . '" href="/directory?' . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
     }    
     elseif ($term->parents[0] == 0) {
