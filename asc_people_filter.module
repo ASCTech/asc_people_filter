@@ -19,6 +19,7 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
       $blocks[0]['cache'] = BLOCK_NO_CACHE;
       $blocks[1]['info'] = t('Appointments');
       $blocks[2]['info'] = t('Research Interests');
+      $blocks[3]['info'] = t('Back to Top');
       return $blocks;
 
     case 'view':
@@ -53,6 +54,11 @@ function asc_people_filter_block($op = 'list', $delta = 0, $edit = array()) {
         
         $block['content'] = theme('item_list',$list);
         $block['subject'] = "Filter by Interest";
+      }
+
+      elseif ($delta == 3) {
+        $block['content'] = '<div id="backtotop"><a href="#">Back to Top</a></div>';
+        $block['subject'] = "";
       }
       return $block;
   }  
