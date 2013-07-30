@@ -1,0 +1,8 @@
+name = Advanced News Filter
+description = Module to add support to ASC Custom News Filter
+core = 6.x
+package = ASC
+version = 6.x-1.0-dev
+project = asc
+
+stylesheets[] = advanced_news_filter.css

@@ -1,6 +1,0 @@
-name = Advanced People Filter
-description = Module to add support to ASC Custom People Filter
-core = 6.x
-package = ASC
-version = 6.x-1.0-dev
-project = asc_people_filter

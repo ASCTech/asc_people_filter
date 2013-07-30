@@ -1,0 +1,158 @@
+<?php
+
+/* 
+ **
+ **
+ **
+ */
+drupal_add_css(drupal_get_path('module', 'asc_news_filter') . '/asc_news_filter.css');
+
+/**
+* * Implementation of hook_form_alter()
+* */
+function asc_news_filter_form_alter(&$form, $form_state, $form_id) {
+    
+    if ($form['#id'] == 'views-exposed-form-People-page-1') {
+      $form['appt']['#options']['All'] = t('All');
+      $form['area']['#options']['All'] = t('All');
+    }
+
+}
+
+function asc_news_filter_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks[0]['info'] = t('Active Filters');
+      $blocks[0]['cache'] = BLOCK_NO_CACHE;
+      $blocks[1]['info'] = t('News Area Filter');
+      $blocks[1]['cache'] = BLOCK_NO_CACHE;
+      $blocks[2]['info'] = t('News Discovery Theme Filter');
+      $blocks[2]['cache'] = BLOCK_NO_CACHE;
+      $blocks[3]['info'] = t('News Topic Filter');
+      $blocks[3]['cache'] = BLOCK_NO_CACHE;
+      $blocks[4]['info'] = t('Events Area Filter');
+      $blocks[4]['cache'] = BLOCK_NO_CACHE;
+      $blocks[5]['info'] = t('Events Type Filter');
+      $blocks[5]['cache'] = BLOCK_NO_CACHE;
+      return $blocks;
+
+    case 'view':
+      if ($delta == 0) {
+        $terms = array();
+
+        if (isset($_GET['area']) && $_GET['area'] != "All") {
+          $term = taxonomy_get_term($_GET['area']);
+          $terms[] = $term->name;
+        }
+
+        if (isset($_GET['discovery']) && $_GET['discovery'] != "All") {
+          $term = taxonomy_get_term($_GET['discovery']);
+          $terms[] = $term->name;
+        }
+
+        if (isset($_GET['topic']) && $_GET['topic'] != "All") {
+          $term = taxonomy_get_term($_GET['topic']);
+          $terms[] = $term->name;
+        }
+
+	if (isset($_GET['EventArea']) && $_GET['EventArea'] != "All") {
+          $term = taxonomy_get_term($_GET['EventArea']);
+          $terms[] = $term->name;
+        }
+
+	if (isset($_GET['EventType']) && $_GET['EventType'] != "All") {
+          $term = taxonomy_get_term($_GET['EventType']);
+          $terms[] = $term->name;
+        }
+
+        $block['subject'] = t('Active Filters');
+        $block['content'] = theme('item_list',$terms);
+      }      
+      elseif ($delta == 1) {
+        $list = array();
+        $vocabulary = "area";
+        $list = build_filter_list($vocabulary);
+        
+        $block['content'] = theme('item_list', $list, NULL, 'ul', array('class' => 'menu'));
+        $block['subject'] = "Filter by Area";
+      }
+      elseif ($delta == 2) {
+        $list = array();
+        $vocabulary = "discovery";
+        $list = build_filter_list($vocabulary);
+        
+        $block['content'] = theme('item_list',$list);
+        $block['subject'] = "Filter by Discovery Theme";
+      }
+      elseif ($delta == 3) {
+        $list = array();
+        $vocabulary = "topic";
+        $list = build_filter_list($vocabulary);
+        
+        $block['content'] = theme('item_list',$list, NULL, 'ul', array('class' => 'menu'));
+        $block['subject'] = "Filter by Topic";
+      }
+
+      elseif ($delta == 4) {
+        $list = array();
+        $vocabulary = "EventArea";
+        $list = build_filter_list($vocabulary);
+        
+        $block['content'] = theme('item_list',$list, NULL, 'ul', array('class' => 'menu'));
+        $block['subject'] = "Filter by Area";
+      }
+
+      elseif ($delta == 5) {
+        $list = array();
+        $vocabulary = "EventType";
+        $list = build_filter_list($vocabulary);
+        
+        $block['content'] = theme('item_list',$list, NULL, 'ul', array('class' => 'menu'));
+        $block['subject'] = "Filter by Type";
+      }
+
+      return $block;
+  }  
+}
+
+function construct_querystring($vocabulary) {
+  $string = "?";
+  foreach ($_GET as $get => $value) {
+    if ($get != 'q' && $get != $vocabulary) {
+      $string .= $get . "=" . $value . "&";
+    }
+  }
+  return $string;
+}
+
+function build_filter_list($vocabulary) {
+  $qs = construct_querystring($vocabulary);
+  $url = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?'));
+
+  //Start by getting vocab name from vid.
+  $result = db_query("SELECT vid FROM {vocabulary} WHERE name = '%s'", $vocabulary);
+  $vid = db_fetch_object($result)->vid;
+
+  //Get all terms for that vocab.
+  $terms = taxonomy_get_tree($vid);
+  unset($get[$vocabulary]);
+  $list[] = '<a href="' . $url . '">All</a>';
+  $active_term = taxonomy_get_term($_GET[$vocabulary]);
+  $active_parents = taxonomy_get_parents($active_term->tid);
+  $active_parent_id = array_shift($active_parents)->tid;
+  foreach ($terms as &$term) {
+    ($active_term->tid == $term->tid) ? $classes = "active" : $classes = "";
+
+    // Check to see if current term, parents or siblings are active. Otherwise, don't render unless top level.
+    if ($term->parents[0] != 0 && ($classes == "active" || $term->parents[0] == $_GET[$vocabulary]) || $active_parent_id == $term->parents[0]) {
+      $list[$term->parents[0]]["children"][] = '<a class="' . $classes . '" href="' . $url . $qs  . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
+    }    
+    elseif ($term->parents[0] == 0) {
+      $list[][] = '<a class="' . $classes . '" href="' . $url . $qs . $vocabulary . '=' . $term->tid . $newget . '">' . $term->name . '</a>';
+    }  
+  }
+  return($list);
+}
+
+
+?>
